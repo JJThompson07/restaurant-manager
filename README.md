@@ -1,4 +1,9 @@
 # restaurant-manager
+```
+will only work on local environtments:
+http://localhost:8080/
+https://localhost:8080/
+```
 
 ## Project setup
 ```
