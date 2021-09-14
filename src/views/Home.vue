@@ -32,37 +32,7 @@
           <div class="result__orders--intro">
             On {{ filteredResults.gender == 'Male' ? 'his' : 'her' }} visit {{ filteredResults.first_name }} orderd:
           </div>
-          <div v-for="order in filteredResults.orders" :key="order.id" class="order">
-            <div class="order__name">
-              {{ order.name }}
-
-            </div>
-            <div class="order__details">
-              <div class="order__details--title">
-                Order Details
-              </div>
-              <div class="order__details--content">
-                <div class="order__id">
-                  <span class="small">
-                    Order ID:
-                  </span>
-                  {{ order.id }}
-                </div>
-                <div class="order__quantity">
-                  <span class="small">
-                    Quantity:
-                  </span>
-                  {{ order.quantity }}
-                </div>
-                <div class="order__price">
-                  <span class="small">
-                    Price:
-                  </span>
-                  £{{ order.price }}
-                </div>
-              </div>
-            </div>
-          </div>
+          <SingleOrder v-for="order in filteredResults.orders" :key="order.id" class="order" :order="order" />
         </div>
         <div v-else class="result__no-orders error">Sadly {{ filteredResults.first_name }} did not place and order on
           {{ filteredResults.gender == 'Male' ? 'his' : 'her' }} visit</div>
@@ -76,8 +46,10 @@ import getGuests from '../composables/getGuests'
 import getGuestsOrders from '../composables/getGuestsOrders'
 import { format } from 'date-fns'
 import { ref, computed } from 'vue'
+import SingleOrder from '../components/SingleOrder'
 export default {
   name: 'Home',
+  components: { SingleOrder },
   setup() {
     const { guests, error } = getGuests()
     const { orders, err } = getGuestsOrders()
@@ -197,33 +169,6 @@ export default {
        display: flex;
        flex-flow: column;
        gap: 1rem;
-     }
-   }
-
-   .order {
-     display: flex;
-     background: whitesmoke;
-     font-weight: bold;
-
-     &__name {
-       padding: 1rem;
-       color: var(--secondary);
-       font-size: 1.5rem;
-       flex: 1;
-     }
-
-     &__details {
-       padding: 0.5rem 1rem;
-       display: flex;
-       flex-flow: column;
-       gap: 1rem;
-       color: white;
-       background: var(--secondary-dark);
-
-       &--content {
-         display: flex;
-         gap: 1rem;
-       }
      }
    }
  }

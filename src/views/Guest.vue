@@ -34,37 +34,7 @@
     </div>
     <div v-if="order" class="orders">
       <div class="orders__title">Orders</div>
-      <div class="order">
-        <div class="order__name">
-          {{ order.name }}
-
-        </div>
-        <div class="order__details">
-          <div class="order__details--title">
-            Order Details
-          </div>
-          <div class="order__details--content">
-            <div class="order__id">
-                  <span class="small">
-                    Order ID:
-                  </span>
-              {{ order.id }}
-            </div>
-            <div class="order__quantity">
-                  <span class="small">
-                    Quantity:
-                  </span>
-              {{ order.quantity }}
-            </div>
-            <div class="order__price">
-                  <span class="small">
-                    Price:
-                  </span>
-              £{{ order.price }}
-            </div>
-          </div>
-        </div>
-      </div>
+      <SingleOrder :order="order" />
     </div>
     <div v-else class="error">No orders currently placed</div>
     <div v-if="error" class="error">{{ error }}</div>
@@ -77,9 +47,11 @@ import getGuestsOrders from '../composables/getGuestsOrders'
 import getGuests from '../composables/getGuests'
 import { computed } from 'vue'
 import { format } from 'date-fns'
+import SingleOrder from '../components/SingleOrder'
 
 export default {
   name: "Guest",
+  components: { SingleOrder },
   props: {
     id: {
       type: Number,
