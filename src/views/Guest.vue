@@ -66,6 +66,7 @@
         </div>
       </div>
     </div>
+    <div v-else class="error">No orders currently placed</div>
     <div v-if="error" class="error">{{ error }}</div>
     <Loader v-if="!error && !guest" />
   </div>
